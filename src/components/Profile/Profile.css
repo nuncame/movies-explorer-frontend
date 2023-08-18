@@ -1,0 +1,143 @@
+.profile {
+  max-width: 410px;
+  margin: 74px auto 70px;
+}
+
+.profile__header {
+  margin-bottom: 123px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.profile__container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.profile__email-container {
+  border: none;
+}
+
+.profile__text {
+  margin: 0 0 20px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.profile__edit-btn {
+  margin: 186px auto 16px;
+  width: 100%;
+  padding: 0;
+  text-align: center;
+  border: none;
+  background-color: #ffffff;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.profile__edit-btn:hover {
+  transition: opacity 0.4s linear;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.profile__logout {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ee3465;
+}
+
+.profile__logout:hover {
+  transition: opacity 0.4s linear;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.profile__input {
+  margin: 0 0 20px;
+  padding: 0;
+  border: none;
+  font-size: 11px;
+  font-weight: 500;
+  text-align: right;
+}
+
+.profile__input-error {
+  display: block;
+  margin: 165px auto 20px;
+  font-size: 11px;
+  font-weight: 400;
+  color: #ff004c;
+  text-align: center;
+}
+
+.profile__submit-btn {
+  width: 410px;
+  height: 45px;
+  background-color: #3456f3;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  border-radius: 3px;
+}
+
+.profile__submit-btn:hover {
+  transition: opacity 0.4s linear;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.profile__submit-btn_inactive {
+    background-color: #f8f8f8;
+    color: #c2c2c2;
+}
+
+@media (max-width: 799px) {
+  .profile {
+      margin-top: 230px;
+  }
+
+  .profile__header {
+    margin-bottom: 96px;
+  }
+
+  .profile__edit-btn {
+    margin-top: 176px;
+}
+}
+
+@media (max-width: 549px) {
+  .profile {
+      margin-top: 66px;
+      max-width: 260px;
+  }
+
+.profile__header {
+  margin-bottom: 81px;
+}
+
+.profile__edit-btn {
+  margin: 186px auto 16px;
+  font-size: 12px;
+}
+
+.profile__logout {
+  font-weight: 500;
+}
+
+.profile__input-error {
+  margin-top: 326px;
+}
+
+.profile__submit-btn {
+  width: 260px;
+  font-size: 12px;
+}
+}

@@ -1,0 +1,22 @@
+.main__header {
+  background-color: #465dff;
+}
+
+.main__section-header {
+  padding-top: 90px;
+  margin: 0 0 70px;
+  line-height: 3;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.88px;
+  border-bottom: 1px solid;
+}
+
+@media (max-width: 709px) {
+  .main__section-header {
+    padding-top: 70px;
+    margin-bottom: 60px;
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+}
