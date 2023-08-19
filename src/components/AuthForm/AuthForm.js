@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function AuthForm(props) {
   return (
-      <div className='authForm'>
+      <main className='authForm'>
         <Link to='/' className='authForm__logo-link'>
           <img src={BeatFilmLogo} alt='BeatFilm' className='authForm__logo' />
         </Link>
@@ -24,6 +24,7 @@ export default function AuthForm(props) {
             onChange={props.handleChange}
             minLength='2'
             maxLength='40'
+            placeholder=''
             required
           />
           <span className='authForm__input-error email-input-error'></span>
@@ -37,6 +38,7 @@ export default function AuthForm(props) {
             onChange={props.handleChange}
             minLength='2'
             maxLength='40'
+            placeholder=''
             required
           />
           <span className='authForm__input-error password-input-error'>Какая-то ошибка...</span>
@@ -51,6 +53,6 @@ export default function AuthForm(props) {
             {props.linkCaption}
           </Link>
         </div>
-      </div>
+      </main>
   );
 }

@@ -18,8 +18,9 @@ export default function AboutMe() {
           </p>
           <a
             href='https://github.com/nuncame'
-            target='_blanc'
+            target='_blank'
             className='about-me__gh-link'
+            rel='noreferrer'
           >
             Github
           </a>

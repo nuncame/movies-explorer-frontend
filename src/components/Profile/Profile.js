@@ -10,7 +10,7 @@ export default function Profile(props) {
   return (
     <>
       <Header isLoggedIn={true} />
-      <section className='profile'>
+      <main className='profile'>
         <h2 className='profile__header'>Привет, {props.name}!</h2>
         {isEdit ? (
           <form className='profile__form'>
@@ -75,7 +75,7 @@ export default function Profile(props) {
             </Link>
           </>
         )}
-      </section>
+      </main>
     </>
   );
 }

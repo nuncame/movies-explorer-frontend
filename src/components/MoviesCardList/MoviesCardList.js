@@ -3,7 +3,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 export default function MoviesCardList(props) {
   return (
     <>
-      <section className='moviesCardList'>
+      <main className='moviesCardList'>
         <MoviesCard
           isSavedMovies={props.isSavedMovies}
           isSaved={false}
@@ -25,9 +25,9 @@ export default function MoviesCardList(props) {
           length='1ч 47м'
           image='https://orbitar.media/2BrPlL2xZGKK0xVxLvIaCplzVtJ7AEDALI.jpg'
         />
-      </section>
-      <div className='moviesCardList__more'>
-          <button className='moviesCardList__more-btn' type='button'>
+      </main>
+      <div className='moviesCardList-more'>
+          <button className='moviesCardList-moreBtn' type='button'>
             Ещё
           </button>
       </div>

@@ -14,13 +14,14 @@ export default function Register() {
     >
       <h3 className='authForm__input-caption'>Имя</h3>
       <input
-        type='name'
+        type='text'
         className='authForm__input authForm__input_textfield_name'
         name='name'
         id='register-name-input'
         value='Вика'
         minLength='2'
         maxLength='40'
+        placeholder=''
         required
       />
       <span className='authForm__input-error name-input-error'></span>

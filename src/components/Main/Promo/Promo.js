@@ -2,7 +2,7 @@ import WebWorldLogo from "../../../images/WebWorldLogo.svg";
 
 export default function Promo() {
   return (
-    <div className='promo__background'>
+    <div className='promo-background'>
       <section className='promo'>
         <div className='promo__captions'>
           <h1 className='promo__header'>

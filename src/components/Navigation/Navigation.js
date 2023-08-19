@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import ProfileIcon from "../../images/ProfileIcon.svg";
-import ProfileIconLight from "../../images/ProfileIconLight.svg";
 import Burger from "../../images/Burger.svg";
-import BurgerLight from "../../images/BurgerLight.svg";
-import Close from "../../images/Close.svg";
 
 export default function Navigation(props) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -12,14 +9,22 @@ export default function Navigation(props) {
 
   return (
     <>
-      <nav className={`navigation ${menuOpen ? "navigation__open" : ""}`}>
+      <nav className={`navigation ${menuOpen ? "navigation_open" : ""}`}>
         <div className='navigation__movies'>
-          <button className={`${menuOpen ? "navigation__close-btn" : "navigation__close-btn_disabled"}`} type='button' onClick={handleClick} ></button>
+          <button
+            className={`navigation__close-btn ${
+              menuOpen
+                ? ""
+                : "navigation__close-btn_disabled"
+            }`}
+            type='button'
+            onClick={handleClick}
+          ></button>
           <NavLink
             to='/'
             className={({ isActive }) =>
-              `${isActive ? "navigation__link_active" : ""} ${
-                menuOpen ? "navigation__link" : "navigation__link__closed"
+              `navigation__link ${isActive ? "navigation__link_active" : ""} ${
+                menuOpen ? "" : "navigation__link_closed"
               }`
             }
           >
@@ -56,25 +61,25 @@ export default function Navigation(props) {
         >
           Аккаунт
           <img
-            src={`${
-              props.isLight && menuOpen === false
-                ? ProfileIconLight
-                : ProfileIcon
-            }`}
+            src={ProfileIcon}
             alt='профиль'
-            className='navigation__profile-icon'
+            className={`navigation__profile-icon ${
+              props.isLight && menuOpen === false
+                ? "navigation__profile-icon_light"
+                : "navigation__profile-icon_dark"
+            }`}
           />
         </NavLink>
       </nav>
       <button
-        className='navigation__burger-btn'
+        className='navigation-burgerBtn'
         type='button'
         onClick={handleClick}
       >
         <img
-          src={`${props.isLight ? BurgerLight : Burger}`}
+          src={Burger}
           alt='меню'
-          className='navigation__burger-icon'
+          className='navigation-burgerIcon'
         />
       </button>
     </>

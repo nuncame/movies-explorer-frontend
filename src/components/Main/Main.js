@@ -10,7 +10,7 @@ import Footer from "../Footer/Footer";
 export default function Main() {
   return (
     <>
-      <div className='main__header'>
+      <div className='main-header'>
         <Header isLoggedIn={true} isLight={true} />
       </div>
       <main className='main'>

@@ -113,7 +113,7 @@
 }
 
 @media (max-width: 549px) {
-    .authForm__container {
+    .authForm {
         margin-top: 56px;
         max-width: 260px;
     }
@@ -140,7 +140,6 @@
 
     .authForm__caption-text {
         font-size: 12px;
-    
     }
     
     .authForm__caption-link {

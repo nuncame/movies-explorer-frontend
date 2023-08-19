@@ -1,6 +1,6 @@
 export default function Techs() {
   return (
-    <div className='techs__background'>
+    <div className='techs-background'>
       <section className='techs'>
         <h2 className='main__section-header techs__header'>Технологии</h2>
         <h2 className='techs__title'>7 технологий</h2>
