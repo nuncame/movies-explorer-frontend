@@ -1,0 +1,148 @@
+.authForm {
+    margin: 70px auto 16px;
+    display: flex;
+    flex-direction: column;
+    max-width: 396px;
+}
+
+.authForm__logo-link {
+    width: 38px;
+    height: 38px;
+}
+
+.authForm__logo-link:hover {
+    cursor: pointer;
+}
+
+.authForm__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.authForm__header {
+    margin: 40px 0;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.authForm__input-caption {
+    margin: 0 0 10px;
+    font-size: 10px;
+    font-weight: 400;
+    color: #a0a0a0;
+}
+.authForm__input {
+    margin-bottom: 10px;
+    padding: 0 15px;
+    min-height: 46px;
+    border: none;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.authForm__input_type_error {
+    color: #ee3465;
+}
+
+.authForm__input-error {
+    min-height: 11px;
+    color: #ee3465;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.authForm__submit-btn {
+    justify-self: flex-end;
+    margin: 159px 0 16px;
+    min-height: 45px;
+    background-color: #ff6838;
+    border-radius: 3px;
+    color: #ffffff;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+}
+
+.authForm__submit-btn:nth-child(10) {
+    margin-top: 69px;
+}
+
+.authForm__submit-btn:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+ 
+.authForm__caption {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.authForm__caption-text {
+    margin: 0;
+    color: #a0a0a0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+
+}
+
+.authForm__caption-link {
+    text-decoration: none;
+    color: #ff6838;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+}
+
+.authForm__caption-link:hover {
+    transition: opacity .4s linear;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+@media (max-width: 799px) {
+    .authForm__container {
+        margin-top: 232px;
+    }
+}
+
+@media (max-width: 549px) {
+    .authForm {
+        margin-top: 56px;
+        max-width: 260px;
+    }
+
+    .authForm__logo-link {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .authForm__header {
+        margin: 50px auto 80px;
+    }
+
+    .authForm__submit-btn {
+        font-size: 12px;
+        line-height: 15px;
+        margin-top: 247px;
+        margin-bottom: 14px;
+    }
+
+    .authForm__submit-btn:nth-child(10) {
+        margin-top: 157px;
+    }
+
+    .authForm__caption-text {
+        font-size: 12px;
+    }
+    
+    .authForm__caption-link {
+        font-size: 12px;
+    }
+}
