@@ -1,36 +1,37 @@
 import MoviesCard from "../MoviesCard/MoviesCard";
 
 export default function MoviesCardList(props) {
+  const renderedMovies = props.renderedMovies;
+
   return (
     <>
       <main className='moviesCardList'>
-        <MoviesCard
-          isSavedMovies={props.isSavedMovies}
-          isSaved={false}
-          name='33 слова о дизайне'
-          length='1ч 47м'
-          image='https://orbitar.media/2BrPlL2xZGKK0xVxLvIaCplzVtJ7AEDALI.jpg'
-        />
-        <MoviesCard
-          isSavedMovies={props.isSavedMovies}
-          isSaved={false}
-          name='33 слова о дизайне'
-          length='1ч 47м'
-          image='https://orbitar.media/2BrPlL2xZGKK0xVxLvIaCplzVtJ7AEDALI.jpg'
-        />
-        <MoviesCard
-          isSavedMovies={props.isSavedMovies}
-          isSaved={true}
-          name='33 слова о дизайне'
-          length='1ч 47м'
-          image='https://orbitar.media/2BrPlL2xZGKK0xVxLvIaCplzVtJ7AEDALI.jpg'
-        />
+        {props.isSavedMovies
+          ? renderedMovies.map((movie) => (
+              <MoviesCard
+                key={movie.id || movie._id}
+                isSaved={props.isSaved}
+                movie={movie}
+                onSaveClick={props.onSaveClick}
+                isSavedMovies={props.isSavedMovies}
+                userMovies={props.userMovies}
+                movieDelete={props.movieDelete}
+              />
+            ))
+          : renderedMovies
+              ?.slice(0, props.roundedVisibleCardCount)
+              .map((movie) => (
+                <MoviesCard
+                  key={movie.id || movie._id}
+                  isSaved={props.isSaved}
+                  movie={movie}
+                  onSaveClick={props.onSaveClick}
+                  isSavedMovies={props.isSavedMovies}
+                  userMovies={props.userMovies}
+                  movieDelete={props.movieDelete}
+                />
+              ))}
       </main>
-      <div className='moviesCardList-more'>
-          <button className='moviesCardList-moreBtn' type='button'>
-            Ещё
-          </button>
-      </div>
     </>
   );
 }

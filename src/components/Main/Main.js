@@ -7,11 +7,11 @@ import AboutMe from "./AboutMe/AboutMe";
 import Portfolio from "./Portfolio/Portfolio";
 import Footer from "../Footer/Footer";
 
-export default function Main() {
+export default function Main(props) {
   return (
     <>
       <div className='main-header'>
-        <Header isLoggedIn={true} isLight={true} />
+        <Header isLoggedIn={props.isLoggedIn} isLight={true} />
       </div>
       <main className='main'>
         <Promo />

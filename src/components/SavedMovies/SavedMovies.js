@@ -1,16 +1,33 @@
+import { useEffect } from "react";
 import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
-import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 
-export default function SavedMovies() {
+export default function SavedMovies(props) {
+
+  useEffect(() => {
+    props.loadUserMovies();
+  }, []);
+
   return (
     <>
-      <Header isLoggedIn={true} />
-      <SearchForm />
-      <FilterCheckbox />
-      <MoviesCardList isSavedMovies={true} />
+      <Header isLoggedIn={props.isLoggedIn} />
+      <SearchForm
+        handleMovieSearch={props.handleMovieSearch}
+        movies={props.movies}
+        searchValue=''
+        isShort={false}
+        setRenderedMovies={props.setRenderedMovies}
+        setIsShort={props.setIsShort}
+        isSavedMovies={true}
+      />
+      <MoviesCardList
+        isSavedMovies={true}
+        renderedMovies={props.renderedMovies}
+        userMovies={props.userMovies}
+        movieDelete={props.movieDelete}
+      />
       <Footer />
     </>
   );

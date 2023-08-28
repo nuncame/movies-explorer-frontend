@@ -2,6 +2,7 @@ import BeatFilmLogo from "../../images/BeatFilmLogo.svg";
 import { Link } from "react-router-dom";
 
 export default function AuthForm(props) {
+
   return (
       <main className='authForm'>
         <Link to='/' className='authForm__logo-link'>
@@ -17,33 +18,34 @@ export default function AuthForm(props) {
           <h3 className='authForm__input-caption'>E-mail</h3>
           <input
             type='email'
-            className='authForm__input authForm__input_textfield_email'
-            name='email'
+            className={`authForm__input authForm__input_textfield_email ${props.emailErr ? 'authForm__input_type_error' : ''}`}
+            name={`${props.name}Email`}
             id={`${props.name}-email-input`}
             value={props.email}
-            onChange={props.handleChange}
+            onChange={props.onChange}
             minLength='2'
             maxLength='40'
             placeholder=''
             required
           />
-          <span className='authForm__input-error email-input-error'></span>
+          <span className={`authForm__input-error ${props.name}-email-input-error`}>{props.emailErr}</span>
           <h3 className='authForm__input-caption'>Пароль</h3>
           <input
             type='password'
-            className='authForm__input authForm__input_type_error authForm__input_textfield_password'
-            name='password'
+            className={`authForm__input authForm__input_textfield_password ${props.passwordErr ? 'authForm__input_type_error' : ''}`}
+            name={`${props.name}Password`}
             id={`${props.name}-password-input`}
             value={props.password}
-            onChange={props.handleChange}
+            onChange={props.onChange}
             minLength='2'
             maxLength='40'
             placeholder=''
             required
           />
-          <span className='authForm__input-error password-input-error'>Какая-то ошибка...</span>
+          <span className={`authForm__input-error ${props.name}-email-input-error`}>{props.passwordErr}</span>
 
-          <button type='submit' className='authForm__submit-btn'>
+          <span className='authForm__error'>{props.authError}</span>
+          <button type='submit' className={`authForm__submit-btn ${!props.isValid ? 'authForm__submit-btn_inactive': ''}`}>
             {props.btnTitle}
           </button>
         </form>

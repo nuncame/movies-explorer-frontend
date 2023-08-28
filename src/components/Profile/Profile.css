@@ -45,9 +45,12 @@
 }
 
 .profile__logout {
-  display: block;
-  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0;
   text-decoration: none;
+  border: none;
+  background-color: transparent;
   font-size: 13px;
   font-weight: 500;
   color: #ee3465;
@@ -95,13 +98,13 @@
 }
 
 .profile__submit-btn_inactive {
-    background-color: #f8f8f8;
-    color: #c2c2c2;
+  background-color: #f8f8f8;
+  color: #c2c2c2;
 }
 
 @media (max-width: 799px) {
   .profile {
-      margin-top: 230px;
+    margin-top: 230px;
   }
 
   .profile__header {
@@ -110,34 +113,34 @@
 
   .profile__edit-btn {
     margin-top: 176px;
-}
+  }
 }
 
 @media (max-width: 549px) {
   .profile {
-      margin-top: 66px;
-      max-width: 260px;
+    margin-top: 66px;
+    max-width: 260px;
   }
 
-.profile__header {
-  margin-bottom: 81px;
-}
+  .profile__header {
+    margin-bottom: 81px;
+  }
 
-.profile__edit-btn {
-  margin: 186px auto 16px;
-  font-size: 12px;
-}
+  .profile__edit-btn {
+    margin: 186px auto 16px;
+    font-size: 12px;
+  }
 
-.profile__logout {
-  font-weight: 500;
-}
+  .profile__logout {
+    font-weight: 500;
+  }
 
-.profile__input-error {
-  margin-top: 326px;
-}
+  .profile__input-error {
+    margin-top: 326px;
+  }
 
-.profile__submit-btn {
-  width: 260px;
-  font-size: 12px;
-}
+  .profile__submit-btn {
+    width: 260px;
+    font-size: 12px;
+  }
 }
