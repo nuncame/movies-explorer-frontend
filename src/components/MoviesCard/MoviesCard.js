@@ -2,19 +2,17 @@ export default function MoviesCard(props) {
   const foundMovies = props.foundMovies;
   const userMoviesIds = props.userMovies.map((movie) => movie.movieId);
 
-  function checkIfAdded() {
-    if (userMoviesIds.includes(props.movie.id)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  // function checkIfAdded() {
+  //   if (userMoviesIds.includes(props.movie.id)) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
-  const isAdded = checkIfAdded();
+  // const isAdded = checkIfAdded();
 
-  const moviesCardSavedBtnClassName = `moviesCard__saveBtn ${
-    isAdded && "moviesCard__saveBtn_active"
-  }`;
+  // const moviesCardSavedBtnClassName = ``;
 
   function timeConverter(number) {
     const h = Math.floor(number / 60);
@@ -24,6 +22,7 @@ export default function MoviesCard(props) {
 
   function handleSaveClick() {
     props.onSaveClick(props.movie);
+    console.log(props.movie);
   }
 
   function handleMovieDelete() {
@@ -42,7 +41,9 @@ export default function MoviesCard(props) {
           <button className='moviesCard__delBtn' type='button' onClick={handleMovieDelete} />
         ) : (
           <button
-            className={moviesCardSavedBtnClassName}
+            className={`moviesCard__saveBtn ${
+              props.movie.isAdded && "moviesCard__saveBtn_active"
+            }`}
             onClick={handleSaveClick}
             type='button'
           />

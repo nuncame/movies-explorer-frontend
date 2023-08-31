@@ -7,25 +7,6 @@ import { useMediaQuery } from "../../hooks/useMediaQuery";
 import Preloader from "../Preloader/Preloader";
 
 export default function Movies(props) {
-  // const [movies, setMovies] = useState([]);
-  // const [foundMovies, setFoundMovies] = useState(
-  //   JSON.parse(localStorage.getItem("storedMovies")) || []
-  // );
-  // const [isShort, setIsShort] = useState(
-  //   localStorage.getItem("isShortMovie") || false
-  //   );
-  // const [searchValue, setSearchValue] = useState("");
-
-  // useEffect(() => {
-  //   moviesApi
-  //     .getMovies()
-  //     .then((data) => {
-  //       setMovies(data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
   const LG_ROW_CARD_COUNT = 3;
   const MD_ROW_CARD_COUNT = 2;
   const SM_ROW_CARD_COUNT = 1;
@@ -74,41 +55,20 @@ export default function Movies(props) {
     const length = localStorage.getItem("isShortMovie");
     const value = localStorage.getItem("searchValue");
     const storedMovies = JSON.parse(localStorage.getItem("storedMovies"));
-    if (storedMovies) {
+    if (storedMovies.length > 0) {
       props.setRenderedMovies(storedMovies);
       props.setIsShort(length);
       props.setSearchValue(value);
     }
+    props.getMovies();
   }, []);
 
-  // function handleMovieSearch(isShortMovie, search) {
-  //   const propsToCheckName = ["nameRU", "nameEN"];
-  //   let result;
-  //   if (isShortMovie) {
-  //     result = props.movies.filter(
-  //       (obj) =>
-  //         propsToCheckName.some((key) =>
-  //           String(obj[key]).toLowerCase().includes(search)
-  //         ) && obj["duration"] <= 40
-  //     );
-  //   } else {
-  //     result = props.movies.filter((obj) =>
-  //       propsToCheckName.some((key) =>
-  //         String(obj[key]).toLowerCase().includes(search)
-  //       )
-  //     );
-  //   }
-  //   return result;
-  // }
-
   const isLoading = false;
-  const isError = false;
 
   return (
     <div className='movies'>
       <Header isLoggedIn={props.isLoggedIn} />
       <SearchForm
-        handleMovieSearch={props.handleMovieSearch}
         searchValue={props.searchValue}
         isShort={props.isShort}
         setRenderedMovies={props.setRenderedMovies}
@@ -117,8 +77,6 @@ export default function Movies(props) {
       />
       {isLoading ? ( //это будет стейт для прелоадера
         <Preloader />
-      ) : isError ? ( //а сюда стейт который будет наполняться при поиске фильмов
-        <p className='movies__searchError'>{props.errorMsg}</p> //а в этот стейт - текст ошибки
       ) : (
         <MoviesCardList
           userMovies={props.userMovies}

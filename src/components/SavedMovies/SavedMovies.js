@@ -5,7 +5,6 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 
 export default function SavedMovies(props) {
-
   useEffect(() => {
     props.loadUserMovies();
   }, []);
@@ -14,7 +13,6 @@ export default function SavedMovies(props) {
     <>
       <Header isLoggedIn={props.isLoggedIn} />
       <SearchForm
-        handleMovieSearch={props.handleMovieSearch}
         movies={props.movies}
         searchValue=''
         isShort={false}

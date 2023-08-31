@@ -18,7 +18,7 @@ export default function MoviesCardList(props) {
                 movieDelete={props.movieDelete}
               />
             ))
-          : renderedMovies
+          : ывчыфву
               ?.slice(0, props.roundedVisibleCardCount)
               .map((movie) => (
                 <MoviesCard
@@ -28,7 +28,6 @@ export default function MoviesCardList(props) {
                   onSaveClick={props.onSaveClick}
                   isSavedMovies={props.isSavedMovies}
                   userMovies={props.userMovies}
-                  movieDelete={props.movieDelete}
                 />
               ))}
       </main>

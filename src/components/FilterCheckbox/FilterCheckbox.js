@@ -1,4 +1,5 @@
 export default function FilterCheckbox(props) {
+  console.log(props.isShort)
 
   return (
     <section className='filterCheckbox'>

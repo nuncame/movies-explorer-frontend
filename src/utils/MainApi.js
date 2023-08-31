@@ -59,8 +59,8 @@ class MainApi {
     }).then(this._checkResponse);
   }
 
-  changeMovieAdded(data, isAdded) {
-    if (!isAdded) {
+  changeMovieAdded(data) {
+    if (!data.isAdded) {
       return fetch(`${this._url}/movies`, {
         method: "POST",
         headers: this._authHeaders,
@@ -85,7 +85,8 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  baseUrl: "http://localhost:4000",
+  // baseUrl: "http://localhost:4000",
+  baseUrl: "http://api.mymovies-nuncame.nomoreparties.co",
   headers: { "Content-Type": "application/json" },
   authHeaders: {
     Authorization: `Bearer ${localStorage.getItem("token")}`,

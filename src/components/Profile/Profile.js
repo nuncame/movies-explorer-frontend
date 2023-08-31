@@ -65,14 +65,17 @@ export default function Profile(props) {
                 className='profile__input profile__input_textfield_name'
                 name='profileName'
                 id='profile-name-input'
-                value={userName || ''}
+                defaultValue={userName || ''}
                 onChange={handleChange}
                 minLength='2'
                 maxLength='40'
                 required
                 placeholder={currentUser.name}
               />
+
             </div>
+            <span className='authForm__input-error profileName-input-error'>{errors.profileName}</span>
+
             <div className='profile__container profile__email-container'>
               <p className='profile__text profile__email-caption'>E-mail</p>
 
@@ -81,19 +84,22 @@ export default function Profile(props) {
                 className='profile__input profile__input_textfield_email'
                 name='profileEmail'
                 id='profile-email-input'
-                value={email || ''}
+                defaultValue={email || ''}
                 onChange={handleChange}
                 minLength='2'
                 maxLength='40'
                 required
               />
+
             </div>
+            <span className='authForm__input-error profileEmail-input-error'>{errors.profileEmail}</span>
+
             <span className='profile__input-error'>
-              При обновлении профиля произошла ошибка.
+              {props.profileError}
             </span>
             <button
               type='submit'
-              className='profile__submit-btn'
+              className={`profile__submit-btn ${!isValid ? 'profile__submit-btn_inactive': ''}`}
             >
               Сохранить
             </button>

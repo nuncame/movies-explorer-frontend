@@ -1,4 +1,4 @@
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Main from "../Main/Main";
@@ -10,14 +10,13 @@ import Profile from "../Profile/Profile";
 import Error404 from "../Error404/Error404";
 import { moviesApi } from "../../utils/MoviesApi";
 import { mainApi } from "../../utils/MainApi";
-import handleMovieSearch from "../../utils/MovieSearch";
 
 import ProtectedRouteElement from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [userMovies, setUserMovies] = useState([]);
-  const [renderedMovies, setRenderedMovies] = useState([]);
+  const [renderedMovies, setRenderedMovies] = useState(JSON.parse(localStorage.getItem("storedMovies")) || []);
   const [isShort, setIsShort] = useState(localStorage.getItem("isShortMovie"));
   const [searchValue, setSearchValue] = useState("");
   const [currentUser, setCurrentUser] = useState({});
@@ -34,11 +33,11 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-        if (err.includes(409)) {
-          setAuthError("Пользователь с таким email уже существует.");
-        } else if (err.includes(400)) {
-          setAuthError("При регистрации пользователя произошла ошибка.");
-        }
+        // if (err.includes(409)) {
+        //   setAuthError("Пользователь с таким email уже существует.");
+        // } else if (err.includes(400)) {
+        //   setAuthError("При регистрации пользователя произошла ошибка.");
+        // }
       });
   }
 
@@ -108,10 +107,13 @@ function App() {
 
   function signOut() {
     localStorage.removeItem("token");
-    setCurrentUser({});
     localStorage.removeItem("isShortMovie");
     localStorage.removeItem("searchValue");
     localStorage.removeItem("storedMovies");
+    setCurrentUser({});
+    setIsShort(false);
+    setSearchValue('');
+    setMovies([])
     navigate("/signin");
   }
 
@@ -126,50 +128,61 @@ function App() {
       });
   }
 
-  function loadUserMovies() {
+  function loadUserMovies(allMovies) {
     mainApi
       .getSavedMovies()
       .then((data) => {
         setUserMovies(data);
+        const userMoviesIds = data.map((mov) => mov.movieId);
+
+        allMovies.forEach((mov) => {
+          mov.isAdded = userMoviesIds.includes(mov.id)
+        }
+        );
+        setMovies(allMovies);
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
-  useEffect(() => {
+  function getMovies() {
     moviesApi
       .getMovies()
       .then((data) => {
-        setMovies(data);
-        
+        // setMovies(data);
+        loadUserMovies(data);
       })
       .catch((err) => {
         console.log(err);
       });
-    loadUserMovies();
-  }, []);
+    // loadUserMovies();
+  }
 
   function handleSaveClick(movie) {
-    const userMoviesIds = userMovies.map((mov) => mov.movieId);
+    // const userMoviesIds = userMovies.map((mov) => mov.movieId);
 
-    const isAdded = () => {
-      if (userMoviesIds.includes(movie.id)) {
-        return true;
-      } else {
-        return false;
-      }
-    };
+    // const isAdded = () => {
+    //   if (userMoviesIds.includes(movie.id)) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // };
 
     mainApi
-      .changeMovieAdded(movie, isAdded())
+      .changeMovieAdded(movie)
       .then((updMovie) => {
         //сюда приходит ответ с фильмом из моего апи
-        console.log(updMovie);
-        setRenderedMovies((state) =>
-        state.map((mov) => mov.id !== movie.id)
-      );
-      // renderedMovies.forEach(mov => console.log(mov, movie))
+        setRenderedMovies((state) => 
+        state.map((mov) => {
+          console.log(mov.id);
+          console.log(movie.id);
+          if (mov.id === movie.id) {
+            mov.isAdded = !movie.isAdded;
+          }
+        }));
+        // renderedMovies.forEach(mov => console.log(mov, movie))
       })
       .catch((err) => {
         console.log(err);
@@ -184,7 +197,6 @@ function App() {
         setRenderedMovies((state) =>
           state.filter((mov) => mov.movieId !== movie.movieId)
         );
-        console.log(userMovies);
       })
       .catch((err) => {
         console.log(err);
@@ -227,10 +239,10 @@ function App() {
                       setRenderedMovies={setRenderedMovies}
                       setIsShort={setIsShort}
                       setSearchValue={setSearchValue}
-                      handleMovieSearch={handleMovieSearch}
                       searchValue={searchValue}
                       isShort={isShort}
                       renderedMovies={renderedMovies}
+                      getMovies={getMovies}
                     />
                   }
                   isLoggedIn={isLoggedIn}
@@ -248,7 +260,6 @@ function App() {
                       setRenderedMovies={setRenderedMovies}
                       setIsShort={setIsShort}
                       movieDelete={handleMovieDelete}
-                      handleMovieSearch={handleMovieSearch}
                       searchValue={searchValue}
                       isShort={isShort}
                       renderedMovies={renderedMovies}
