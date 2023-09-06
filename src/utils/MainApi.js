@@ -23,7 +23,7 @@ class MainApi {
   }
 
   login(email, password) {
-    return fetch(`${this._url}/signin`, {
+    return fetch(`${this._url}/signin/`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({ email, password }),
@@ -52,41 +52,37 @@ class MainApi {
     }).then(this._checkResponse);
   }
 
+  addMovie(data) {
+    return fetch(`${this._url}/movies`, {
+      method: "POST",
+      headers: this._authHeaders,
+      body: JSON.stringify({
+        country: data.country,
+        director: data.director,
+        duration: data.duration,
+        year: data.year,
+        description: data.description,
+        image: MOVIES_API_URL + "/" + data.image.url,
+        trailer: data.trailerLink,
+        nameRU: data.nameRU,
+        nameEN: data.nameEN,
+        thumbnail: MOVIES_API_URL + data.image.formats.thumbnail.url,
+        movieId: data.id,
+      }),
+    }).then(this._checkResponse);
+  }
+
   deleteMovie(data) {
     return fetch(`${this._url}/movies/${data}`, {
       method: "DELETE",
       headers: this._authHeaders,
     }).then(this._checkResponse);
   }
-
-  changeMovieAdded(data) {
-    if (!data.isAdded) {
-      return fetch(`${this._url}/movies`, {
-        method: "POST",
-        headers: this._authHeaders,
-        body: JSON.stringify({
-          country: data.country,
-          director: data.director,
-          duration: data.duration,
-          year: data.year,
-          description: data.description,
-          image: MOVIES_API_URL + "/" + data.image.url,
-          trailer: data.trailerLink,
-          nameRU: data.nameRU,
-          nameEN: data.nameEN,
-          thumbnail: MOVIES_API_URL + data.image.formats.thumbnail.url,
-          movieId: data.id,
-        }),
-      }).then(this._checkResponse);
-    } else {
-      return this.deleteMovie(data.id);
-    }
-  }
 }
 
 const mainApi = new MainApi({
-  // baseUrl: "http://localhost:4000",
-  baseUrl: "http://api.mymovies-nuncame.nomoreparties.co",
+  // baseUrl: "http://localhost:3000",
+  baseUrl: "https://api.mymovies-nuncame.nomoreparties.co",
   headers: { "Content-Type": "application/json" },
   authHeaders: {
     Authorization: `Bearer ${localStorage.getItem("token")}`,

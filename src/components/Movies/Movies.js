@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
@@ -51,37 +51,44 @@ export default function Movies(props) {
     setVisibleCardCount(visibleCardCount + SM_ROW_CARD_COUNT);
   };
 
-  useEffect(() => {
-    const length = localStorage.getItem("isShortMovie");
-    const value = localStorage.getItem("searchValue");
-    const storedMovies = JSON.parse(localStorage.getItem("storedMovies"));
-    if (storedMovies.length > 0) {
-      props.setRenderedMovies(storedMovies);
-      props.setIsShort(length);
-      props.setSearchValue(value);
-    }
-    props.getMovies();
-  }, []);
+  const [isError, setIsError] = useState(false);
 
-  const isLoading = false;
+  function handleSaveClick(movie) {
+    if (!movie.isAdded) {
+      props.movieAdd(movie);
+    } else {
+      props.movieDelete(movie);
+    }
+  }
+
+  useEffect(() => {
+    const storedMovies = JSON.parse(localStorage.getItem("storedMovies"));
+    console.log(storedMovies);
+    if (storedMovies) {
+      props.setRenderedMovies(storedMovies);
+    }
+    setIsError(false);
+  }, []);
 
   return (
     <div className='movies'>
       <Header isLoggedIn={props.isLoggedIn} />
       <SearchForm
+        isError={isError}
+        setIsError={setIsError}
         searchValue={props.searchValue}
         isShort={props.isShort}
         setRenderedMovies={props.setRenderedMovies}
         setIsShort={props.setIsShort}
         movies={props.movies}
+        movieErr={props.movieErr}
       />
-      {isLoading ? ( //это будет стейт для прелоадера
+      {props.isLoading && isError === false ? (
         <Preloader />
       ) : (
         <MoviesCardList
-          userMovies={props.userMovies}
           renderedMovies={props.renderedMovies}
-          onSaveClick={props.handleSaveClick}
+          onSaveClick={handleSaveClick}
           roundedVisibleCardCount={roundedVisibleCardCount}
         />
       )}

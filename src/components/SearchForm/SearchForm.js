@@ -5,19 +5,11 @@ import handleMovieSearch from "../../utils/MovieSearch";
 
 export default function SearchForm(props) {
   const [isEmpty, setIsEmpty] = useState(false);
-  const [isError, setIsError] = useState(false);
-
-  function changeMovieLength() {
-    if (props.isShort) {
-      props.setIsShort(false);
-    } else props.setIsShort(true);
-  }
 
   const movieSearchRef = useRef();
 
   const handleSearch = (e) => {
-    setIsError(false);
-    console.log(props.movies);
+    props.setIsError(false);
     e.preventDefault();
     if (movieSearchRef.current.value === "") {
       setIsEmpty(true);
@@ -29,30 +21,30 @@ export default function SearchForm(props) {
         props.isShort
       );
       if (filteredMovies.length === 0) {
-        setIsError(true);
+        props.setIsError(true);
       }
+
       props.setRenderedMovies(filteredMovies);
-      console.log(filteredMovies);
       localStorage.setItem("storedMovies", JSON.stringify(filteredMovies));
-      localStorage.setItem("isShortMovie", props.isShort);
+      window.localStorage.setItem("isShortMovie", props.isShort);
       localStorage.setItem("searchValue", movieSearchRef.current.value);
     }
   };
 
   const handleSearchSavedMovies = (e) => {
-    setIsError(false);
+    props.setIsError(false);
     e.preventDefault();
     if (movieSearchRef.current.value === "") {
       setIsEmpty(true);
     } else {
       setIsEmpty(false);
+      console.log(props.movies);
       const filteredMovies = handleMovieSearch(
         props.movies,
         movieSearchRef.current.value,
         props.isShort
       );
       props.setRenderedMovies(filteredMovies);
-      console.log(filteredMovies);
     }
   };
 
@@ -62,6 +54,10 @@ export default function SearchForm(props) {
       movieSearchRef.current.value,
       props.isShort
     );
+    props.setIsError(false);
+    if (updMovies.length === 0) {
+      props.setIsError(true);
+    }
     props.setRenderedMovies(updMovies);
     if (updMovies.length > 0) {
       localStorage.setItem("storedMovies", JSON.stringify(updMovies));
@@ -95,12 +91,16 @@ export default function SearchForm(props) {
           Нужно ввести ключевое слово
         </span>
       </form>
-      <FilterCheckbox
-        checkMovieLength={changeMovieLength}
-        isShort={props.isShort}
-      />
-      {isError ? (
-        <p className='movies__searchError'>Ничего не найдено</p>
+      <FilterCheckbox setIsShort={props.setIsShort} isShort={props.isShort} />
+      {props.isError ? (
+        <p className='searchForm-generalError searchForm-searchError'>
+          Ничего не найдено
+        </p>
+      ) : props.movieErr ? (
+        <p className='searchForm-generalError searchForm-movError'>
+          Во время запроса произошла ошибка. Возможно, проблема с соединением
+          или сервер недоступен. Подождите немного и попробуйте ещё раз
+        </p>
       ) : (
         <></>
       )}

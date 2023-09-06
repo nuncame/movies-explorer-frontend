@@ -1,18 +1,8 @@
+import { useState } from "react";
+
 export default function MoviesCard(props) {
-  const foundMovies = props.foundMovies;
-  const userMoviesIds = props.userMovies.map((movie) => movie.movieId);
 
-  // function checkIfAdded() {
-  //   if (userMoviesIds.includes(props.movie.id)) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
-
-  // const isAdded = checkIfAdded();
-
-  // const moviesCardSavedBtnClassName = ``;
+  const [isAdded, setIsAdded] = useState(props.movie.isAdded)
 
   function timeConverter(number) {
     const h = Math.floor(number / 60);
@@ -22,12 +12,14 @@ export default function MoviesCard(props) {
 
   function handleSaveClick() {
     props.onSaveClick(props.movie);
-    console.log(props.movie);
+    setIsAdded(!props.movie.isAdded);
   }
 
   function handleMovieDelete() {
     props.movieDelete(props.movie);
   }
+
+  console.log(props);
 
 
   return (
@@ -42,7 +34,7 @@ export default function MoviesCard(props) {
         ) : (
           <button
             className={`moviesCard__saveBtn ${
-              props.movie.isAdded && "moviesCard__saveBtn_active"
+              isAdded && "moviesCard__saveBtn_active"
             }`}
             onClick={handleSaveClick}
             type='button'

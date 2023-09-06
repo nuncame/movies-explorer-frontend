@@ -5,26 +5,16 @@ import { useFormWithValidation } from "../../utils/InputValidation";
 export default function Login(props) {
   const [formError, setFormError] = useState(props.authError);
 
-  const { formValue, handleChange, errors, isValid, resetForm } = useFormWithValidation();
-  
-    const handleSubmit = (e) => {
-      const { loginEmail, loginPassword } = formValue;
-      e.preventDefault();
-      props.handleLogin(loginEmail, loginPassword);
-      setFormError('');
-      resetForm();
-    };
+  const { formValue, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation();
 
-    
-  // function handleError() {
-  //   if (props.authError.code === 401) {
-  //     return('Вы ввели неправильный логин или пароль.');
-  //   } else if (props.authError.code === 403) {
-  //     return('При авторизации произошла ошибка. Токен не передан или передан не в том формате.');
-  //   } else if (props.authError.code === 401) {
-  //     return('При авторизации произошла ошибка. Переданный токен некорректен.');
-  //   }
-  // }
+  const handleSubmit = (e) => {
+    const { loginEmail, loginPassword } = formValue;
+    e.preventDefault();
+    props.handleLogin(loginEmail, loginPassword);
+    setFormError("");
+    resetForm();
+  };
 
   return (
     <AuthForm

@@ -19,6 +19,12 @@
   cursor: pointer;
 }
 
+.movies__error {
+  width: fit-content;
+  margin: 10px auto;
+  color: #ff6838;
+}
+
 .movies__searchError {
   width: fit-content;
   margin: 10px auto;

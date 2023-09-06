@@ -9,6 +9,7 @@ export default function Register(props) {
     e.preventDefault();
     props.handleRegister(registerName, registerEmail, registerPassword);
     resetForm();
+    props.setAuthError(false);
   };
 
   return (
