@@ -28,6 +28,7 @@ export default function Register(props) {
       onSubmit={handleSubmit}
       onChange={handleChange}
       authError={props.authError}
+      setAuthError={props.setAuthError}
     >
       <h3 className='authForm__input-caption'>Имя</h3>
       <input

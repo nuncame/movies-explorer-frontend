@@ -3,7 +3,6 @@ const MOVIES_API_URL = "https://api.nomoreparties.co";
 class MainApi {
   constructor(config) {
     this._url = config.baseUrl;
-    this._authHeaders = config.authHeaders;
     this._headers = config.headers;
   }
 
@@ -30,32 +29,36 @@ class MainApi {
     }).then(this._checkResponse);
   }
 
-  getCurrentUser() {
+  getCurrentUser(token) {
+    this._headers.Authorization = token;
     return fetch(`${this._url}/users/me`, {
       method: "GET",
-      headers: this._authHeaders,
+      headers: this._headers,
     }).then(this._checkResponse);
   }
 
-  setUserData(name, email) {
+  setUserData(name, email, token) {
+    this._headers.Authorization = token;
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
-      headers: this._authHeaders,
+      headers: this._headers,
       body: JSON.stringify({ name, email }),
     }).then(this._checkResponse);
   }
 
-  getSavedMovies() {
+  getSavedMovies(token) {
+    this._headers.Authorization = token;
     return fetch(`${this._url}/movies`, {
       method: "GET",
-      headers: this._authHeaders,
+      headers: this._headers,
     }).then(this._checkResponse);
   }
 
-  addMovie(data) {
+  addMovie(data, token) {
+    this._headers.Authorization = token;
     return fetch(`${this._url}/movies`, {
       method: "POST",
-      headers: this._authHeaders,
+      headers: this._headers,
       body: JSON.stringify({
         country: data.country,
         director: data.director,
@@ -72,10 +75,11 @@ class MainApi {
     }).then(this._checkResponse);
   }
 
-  deleteMovie(data) {
+  deleteMovie(data, token) {
+    this._headers.Authorization = token;
     return fetch(`${this._url}/movies/${data}`, {
       method: "DELETE",
-      headers: this._authHeaders,
+      headers: this._headers,
     }).then(this._checkResponse);
   }
 }
@@ -84,10 +88,6 @@ const mainApi = new MainApi({
   // baseUrl: "http://localhost:3000",
   baseUrl: "https://api.mymovies-nuncame.nomoreparties.co",
   headers: { "Content-Type": "application/json" },
-  authHeaders: {
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
-    "Content-Type": "application/json",
-  },
 });
 
 export { mainApi };

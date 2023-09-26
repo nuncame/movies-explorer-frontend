@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
@@ -7,14 +7,21 @@ import Footer from "../Footer/Footer";
 export default function SavedMovies(props) {
   const [isError, setIsError] = useState(false);
 
+  useEffect(() => {
+    setIsError(false);
+    props.loadUserMovies();
+  }, [])
+
+  console.log(props.userMovies);
+
   return (
     <>
       <Header isLoggedIn={props.isLoggedIn} />
       <SearchForm
         movies={props.userMovies}
         searchValue=''
-        isShort={false}
-        setRenderedMovies={props.setUserMovies}
+        isShort={props.isShort}
+        setRenderedUserMovies={props.setRenderedUserMovies}
         setIsShort={props.setIsShort}
         isSavedMovies={true}
         isError={isError}
@@ -22,7 +29,8 @@ export default function SavedMovies(props) {
       />
       <MoviesCardList
         isSavedMovies={true}
-        userMovies={props.userMovies}
+        renderedMovies={props.renderedMovies}
+        renderedUserMovies={props.renderedUserMovies}
         movieDelete={props.movieDelete}
       />
       <Footer />

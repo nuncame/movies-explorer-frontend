@@ -83,7 +83,7 @@
 .profile__submit-btn {
   width: 410px;
   height: 45px;
-  background-color: #3456f3;
+  background-color: #ff6838;
   border: none;
   font-size: 14px;
   font-weight: 500;
@@ -100,6 +100,10 @@
 .profile__submit-btn_inactive {
   background-color: #f8f8f8;
   color: #c2c2c2;
+}
+
+.profile__submit-btn_inactive:hover {
+  cursor: default;
 }
 
 @media (max-width: 799px) {

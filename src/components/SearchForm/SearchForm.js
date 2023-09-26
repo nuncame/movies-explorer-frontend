@@ -8,15 +8,15 @@ export default function SearchForm(props) {
 
   const movieSearchRef = useRef();
 
-  const handleSearch = (e) => {
+  function searchMovie(allMovies) {
     props.setIsError(false);
-    e.preventDefault();
+    props.setVisibleCardCount(props.initialCardCount);
     if (movieSearchRef.current.value === "") {
       setIsEmpty(true);
     } else {
       setIsEmpty(false);
       const filteredMovies = handleMovieSearch(
-        props.movies,
+        allMovies,
         movieSearchRef.current.value,
         props.isShort
       );
@@ -29,13 +29,25 @@ export default function SearchForm(props) {
       window.localStorage.setItem("isShortMovie", props.isShort);
       localStorage.setItem("searchValue", movieSearchRef.current.value);
     }
-  };
+  }
+
+  function handleSearch(e) {
+    console.log(props.movies);
+    e.preventDefault();
+
+    const storedMovies = JSON.parse(localStorage.getItem("storedMovies"));
+    if (!storedMovies && !Array.isArray(storedMovies) ) {
+      props.setIsLoading(true);
+      props.getMovies(searchMovie);
+    } else searchMovie(props.movies);
+  }
 
   const handleSearchSavedMovies = (e) => {
     props.setIsError(false);
     e.preventDefault();
     if (movieSearchRef.current.value === "") {
-      setIsEmpty(true);
+      props.setRenderedUserMovies(props.movies);
+      console.log(props.movies);
     } else {
       setIsEmpty(false);
       console.log(props.movies);
@@ -44,7 +56,7 @@ export default function SearchForm(props) {
         movieSearchRef.current.value,
         props.isShort
       );
-      props.setRenderedMovies(filteredMovies);
+      props.setRenderedUserMovies(filteredMovies);
     }
   };
 
@@ -58,11 +70,16 @@ export default function SearchForm(props) {
     if (updMovies.length === 0) {
       props.setIsError(true);
     }
-    props.setRenderedMovies(updMovies);
-    if (updMovies.length > 0) {
-      localStorage.setItem("storedMovies", JSON.stringify(updMovies));
+    if (!props.isSavedMovies) {
+      props.setRenderedMovies(updMovies);
+      if (updMovies.length > 0) {
+        localStorage.setItem("storedMovies", JSON.stringify(updMovies));
+      }
+      localStorage.setItem("isShortMovie", props.isShort);
     }
-    localStorage.setItem("isShortMovie", props.isShort);
+    if (props.isSavedMovies) {
+      props.setRenderedUserMovies(updMovies);
+    }
   }, [props.isShort]);
 
   return (

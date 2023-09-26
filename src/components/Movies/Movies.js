@@ -5,18 +5,22 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import Preloader from "../Preloader/Preloader";
+import { renderQuantities } from "../../constants/constants";
 
 export default function Movies(props) {
-  const LG_ROW_CARD_COUNT = 3;
-  const MD_ROW_CARD_COUNT = 2;
-  const SM_ROW_CARD_COUNT = 1;
+  const {
+    LG_ROW_CARD_COUNT,
+    MD_ROW_CARD_COUNT,
+    SM_ROW_CARD_COUNT,
+    LG_INITIAL_CARD_COUNT,
+    MD_INITIAL_CARD_COUNT,
+    SM_INITIAL_CARD_COUNT,
+    desktop,
+    tablet,
+  } = renderQuantities();
 
-  const LG_INITIAL_CARD_COUNT = 12;
-  const MD_INITIAL_CARD_COUNT = 8;
-  const SM_INITIAL_CARD_COUNT = 4;
-
-  const isDesktop = useMediaQuery("(min-width: 1200px)");
-  const isTablet = useMediaQuery("(min-width: 746px)");
+  const isDesktop = useMediaQuery(desktop);
+  const isTablet = useMediaQuery(tablet);
 
   const cardColumnCount = isDesktop
     ? LG_ROW_CARD_COUNT
@@ -63,7 +67,6 @@ export default function Movies(props) {
 
   useEffect(() => {
     const storedMovies = JSON.parse(localStorage.getItem("storedMovies"));
-    console.log(storedMovies);
     if (storedMovies) {
       props.setRenderedMovies(storedMovies);
     }
@@ -82,6 +85,10 @@ export default function Movies(props) {
         setIsShort={props.setIsShort}
         movies={props.movies}
         movieErr={props.movieErr}
+        setVisibleCardCount={setVisibleCardCount}
+        initialCardCount={initialCardCount}
+        getMovies={props.getMovies}
+        setIsLoading={props.setIsLoading}
       />
       {props.isLoading && isError === false ? (
         <Preloader />

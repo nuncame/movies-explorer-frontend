@@ -1,7 +1,11 @@
 import BeatFilmLogo from "../../images/BeatFilmLogo.svg";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function AuthForm(props) {
+  useEffect(() => {
+    props.setAuthError(false);
+  },[])
 
   return (
       <main className='authForm'>
@@ -21,10 +25,11 @@ export default function AuthForm(props) {
             className={`authForm__input authForm__input_textfield_email ${props.emailErr ? 'authForm__input_type_error' : ''}`}
             name={`${props.name}Email`}
             id={`${props.name}-email-input`}
-            value={props.email}
+            value={props.email || ''}
             onChange={props.onChange}
             minLength='2'
             maxLength='40'
+            pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
             placeholder=''
             required
           />
@@ -35,7 +40,7 @@ export default function AuthForm(props) {
             className={`authForm__input authForm__input_textfield_password ${props.passwordErr ? 'authForm__input_type_error' : ''}`}
             name={`${props.name}Password`}
             id={`${props.name}-password-input`}
-            value={props.password}
+            value={props.password || ''}
             onChange={props.onChange}
             minLength='2'
             maxLength='40'

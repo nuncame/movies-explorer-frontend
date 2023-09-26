@@ -8,11 +8,27 @@ export default function Profile(props) {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [isEdit, setIsEdit] = useState(false);
+  const [isNameSame, setIsNameSame] = useState(true);
+  const [isEmailSame, setIsEmailSame] = useState(true);
 
   const handleClick = () => setIsEdit(!isEdit);
 
   const { formValue, handleChange, errors, isValid, resetForm } =
     useFormWithValidation();
+
+  const handleChangeName = (e) => {
+    if (e.target.value === currentUser.name) {
+      setIsNameSame(true);
+    } else setIsNameSame(false);
+    handleChange(e);
+  };
+
+  const handleChangeEmail = (e) => {
+    if (e.target.value === currentUser.email) {
+      setIsEmailSame(true);
+    } else setIsEmailSame(false);
+    handleChange(e);
+  };
 
   const handleSubmit = (e) => {
     const { profileName, profileEmail } = formValue;
@@ -47,7 +63,7 @@ export default function Profile(props) {
                 name='profileName'
                 id='profile-name-input'
                 defaultValue={userName || ""}
-                onChange={handleChange}
+                onChange={handleChangeName}
                 minLength='2'
                 maxLength='40'
                 required
@@ -67,9 +83,10 @@ export default function Profile(props) {
                 name='profileEmail'
                 id='profile-email-input'
                 defaultValue={email || ""}
-                onChange={handleChange}
+                onChange={handleChangeEmail}
                 minLength='2'
                 maxLength='40'
+                pattern='[^@\s]+@[^@\s]+\.[^@\s]+'
                 required
               />
             </div>
@@ -81,8 +98,10 @@ export default function Profile(props) {
             <button
               type='submit'
               className={`profile__submit-btn ${
-                !isValid ? "profile__submit-btn_inactive" : ""
+                // !isValid && (isNameSame || isEmailSame) ? "profile__submit-btn_inactive" : ""
+                isValid && (!isNameSame || !isEmailSame) ? "" : "profile__submit-btn_inactive"
               }`}
+              disabled={isValid && (!isNameSame || !isEmailSame) ? false : true}
             >
               Сохранить
             </button>

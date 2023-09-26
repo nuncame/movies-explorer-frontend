@@ -6,7 +6,7 @@ export default function MoviesCardList(props) {
     <>
       <main className='moviesCardList'>
         {props.isSavedMovies
-          ? props.userMovies.map((movie) => (
+          ? props.renderedUserMovies.map((movie) => (
               <MoviesCard
                 key={movie.id || movie._id}
                 isSaved={props.isSaved}

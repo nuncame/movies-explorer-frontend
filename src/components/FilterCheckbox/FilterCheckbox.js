@@ -1,4 +1,11 @@
 export default function FilterCheckbox(props) {
+  function checkIsShort() {
+    if (props.isShort && props.isShort === true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   return (
     <section className='filterCheckbox'>
@@ -6,7 +13,7 @@ export default function FilterCheckbox(props) {
         <input
           type='checkbox'
           className='filterCheckbox__invisible'
-        checked={props.isShort}
+        defaultChecked={props.isShort}
           onClick={() => {
             props.setIsShort(!props.isShort);
           }}

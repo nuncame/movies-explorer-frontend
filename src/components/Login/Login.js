@@ -3,8 +3,6 @@ import AuthForm from "../AuthForm/AuthForm";
 import { useFormWithValidation } from "../../utils/InputValidation";
 
 export default function Login(props) {
-  const [formError, setFormError] = useState(props.authError);
-
   const { formValue, handleChange, errors, isValid, resetForm } =
     useFormWithValidation();
 
@@ -12,7 +10,7 @@ export default function Login(props) {
     const { loginEmail, loginPassword } = formValue;
     e.preventDefault();
     props.handleLogin(loginEmail, loginPassword);
-    setFormError("");
+    props.setAuthError(false);
     resetForm();
   };
 
@@ -31,7 +29,8 @@ export default function Login(props) {
       linkCaption='Регистрация'
       onSubmit={handleSubmit}
       onChange={handleChange}
-      authError={formError}
+      authError={props.authError}
+      setAuthError={props.setAuthError}
     />
   );
 }

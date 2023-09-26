@@ -10,7 +10,7 @@ export default function Header(props) {
       </Link>
 
       <div className='header__links'>
-        {!props.isLoggedIn ? (
+        {props.isLoggedIn ? (
           <Navigation isLight={props.isLight} />
         ) : (
           <div className="header__account-actions">

@@ -19,9 +19,6 @@ export default function MoviesCard(props) {
     props.movieDelete(props.movie);
   }
 
-  console.log(props);
-
-
   return (
     <article className='moviesCard'>
       <div className='moviesCard__caption'>
