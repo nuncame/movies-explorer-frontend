@@ -1,0 +1,113 @@
+.searchForm {
+  max-width: 1140px;
+  margin: 60px auto 0;
+}
+
+.searchForm__search {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.searchForm__image {
+  margin: 6px;
+  margin-right: 14px;
+}
+
+.searchForm__input {
+  width: 100%;
+  padding: 0;
+  border: none;
+  text-align: center;
+  color: #a0a0a0;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 2;
+}
+
+.searchForm__search-btn {
+  padding: 0;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: url(../../images/ForwardIcon.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.searchForm__search-btn:hover {
+  transition: opacity 0.4s linear;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.searchForm-error {
+  display: none;
+  margin: 10px auto 0;
+  width: 100%;
+  text-align: center;
+  color: #ee3465;
+}
+
+.searchForm-error-active {
+  display: block;
+}
+
+.searchForm-generalError {
+  max-width: 1140px;
+  margin: 10px auto;
+  color: #ff6838;
+  text-align: center;
+}
+
+@media (max-width: 1199px) {
+  .searchForm {
+    max-width: 800px;
+    margin-top: 74px;
+  }
+
+  .searchForm-generalError {
+    max-width: 800px;
+  }
+}
+
+@media (max-width: 829px) {
+  .searchForm {
+    max-width: 708px;
+  }
+
+  .searchForm-generalError {
+    max-width: 708px;
+  }
+}
+
+@media (max-width: 709px) {
+  .searchForm {
+    max-width: 505px;
+  }
+
+  .searchForm-generalError {
+    max-width: 505px;
+  }
+}
+
+@media (max-width: 549px) {
+  .searchForm {
+    max-width: 292px;
+    margin-top: 85px;
+  }
+
+  .searchForm__image {
+    display: none;
+  }
+
+  .searchForm__input {
+    text-align: left;
+    font-size: 18px;
+    line-height: 2.4;
+  }
+
+  .searchForm-generalError {
+    max-width: 292px;
+  }
+}

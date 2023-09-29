@@ -1,0 +1,57 @@
+.error404__header {
+  margin: 246px auto 5px;
+  width: max-content;
+  font-size: 140px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.error404__caption {
+  margin: 0 auto;
+  width: max-content;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.error404__btn {
+  margin: 184px auto 0;
+  display: block;
+  background-color: transparent;
+  border: none;
+  width: max-content;
+  text-decoration: none;
+  color: #ff6838;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+
+}
+
+.error404__btn:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+@media (max-width: 799px) {
+  .error404__header {
+    margin-top: 408px;
+  }
+}
+
+@media (max-width: 549px) {
+  .error404__header {
+    margin-top: 329px;
+    margin-bottom: 10px;
+    font-size: 80px;
+  }
+
+  .error404__caption {
+    font-size: 12px;
+  }
+
+  .error404__link {
+    margin-top: 284px;
+    font-size: 12px;
+  }
+}
