@@ -12,8 +12,6 @@ export default function SavedMovies(props) {
     props.loadUserMovies();
   }, [])
 
-  console.log(props.userMovies);
-
   return (
     <>
       <Header isLoggedIn={props.isLoggedIn} />

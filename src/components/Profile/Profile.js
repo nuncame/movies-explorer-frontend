@@ -54,6 +54,7 @@ export default function Profile(props) {
             className='profile__form'
             name='profileForm'
             onSubmit={handleSubmit}
+            noValidate
           >
             <div className='profile__container profile__name-container'>
               <p className='profile__text profile__name-caption'>Имя</p>
@@ -98,7 +99,6 @@ export default function Profile(props) {
             <button
               type='submit'
               className={`profile__submit-btn ${
-                // !isValid && (isNameSame || isEmailSame) ? "profile__submit-btn_inactive" : ""
                 isValid && (!isNameSame || !isEmailSame) ? "" : "profile__submit-btn_inactive"
               }`}
               disabled={isValid && (!isNameSame || !isEmailSame) ? false : true}

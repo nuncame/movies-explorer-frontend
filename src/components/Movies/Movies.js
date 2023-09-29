@@ -52,7 +52,7 @@ export default function Movies(props) {
       return setVisibleCardCount(visibleCardCount + MD_ROW_CARD_COUNT);
     }
 
-    setVisibleCardCount(visibleCardCount + SM_ROW_CARD_COUNT);
+    setVisibleCardCount(visibleCardCount + 2*SM_ROW_CARD_COUNT);
   };
 
   const [isError, setIsError] = useState(false);
@@ -73,6 +73,9 @@ export default function Movies(props) {
     setIsError(false);
   }, []);
 
+
+
+
   return (
     <div className='movies'>
       <Header isLoggedIn={props.isLoggedIn} />
@@ -80,6 +83,7 @@ export default function Movies(props) {
         isError={isError}
         setIsError={setIsError}
         searchValue={props.searchValue}
+        setSearchValue={props.setSearchValue}
         isShort={props.isShort}
         setRenderedMovies={props.setRenderedMovies}
         setIsShort={props.setIsShort}
@@ -87,7 +91,7 @@ export default function Movies(props) {
         movieErr={props.movieErr}
         setVisibleCardCount={setVisibleCardCount}
         initialCardCount={initialCardCount}
-        getMovies={props.getMovies}
+        getInitialMovies={props.getInitialMovies}
         setIsLoading={props.setIsLoading}
       />
       {props.isLoading && isError === false ? (

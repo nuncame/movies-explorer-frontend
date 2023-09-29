@@ -7,6 +7,7 @@ export default function SearchForm(props) {
   const [isEmpty, setIsEmpty] = useState(false);
 
   const movieSearchRef = useRef();
+  const storedMovies = JSON.parse(localStorage.getItem("storedMovies"));
 
   function searchMovie(allMovies) {
     props.setIsError(false);
@@ -26,21 +27,25 @@ export default function SearchForm(props) {
 
       props.setRenderedMovies(filteredMovies);
       localStorage.setItem("storedMovies", JSON.stringify(filteredMovies));
-      window.localStorage.setItem("isShortMovie", props.isShort);
+      localStorage.setItem("isShortMovie", props.isShort);
       localStorage.setItem("searchValue", movieSearchRef.current.value);
     }
   }
 
   function handleSearch(e) {
-    console.log(props.movies);
     e.preventDefault();
 
-    const storedMovies = JSON.parse(localStorage.getItem("storedMovies"));
-    if (!storedMovies && !Array.isArray(storedMovies) ) {
+    if (!storedMovies && !Array.isArray(storedMovies)) {
       props.setIsLoading(true);
-      props.getMovies(searchMovie);
+      props.getInitialMovies(searchMovie);
     } else searchMovie(props.movies);
   }
+
+  useEffect(() => {
+    if (!props.isSavedMovies && Array.isArray(storedMovies)) {
+      props.getInitialMovies();
+    }
+  }, [])
 
   const handleSearchSavedMovies = (e) => {
     props.setIsError(false);

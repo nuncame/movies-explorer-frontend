@@ -14,18 +14,21 @@
   line-height: normal;
 }
 
-.error404__link {
+.error404__btn {
   margin: 184px auto 0;
   display: block;
+  background-color: transparent;
+  border: none;
   width: max-content;
   text-decoration: none;
   color: #ff6838;
   font-size: 14px;
   font-weight: 400;
   line-height: normal;
+
 }
 
-.error404__link:hover {
+.error404__btn:hover {
   cursor: pointer;
   opacity: 0.7;
 }

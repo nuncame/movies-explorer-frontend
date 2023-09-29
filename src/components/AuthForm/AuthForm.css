@@ -72,6 +72,10 @@
   color: #c2c2c2;
 }
 
+.authForm__submit-btn_inactive:hover {
+  cursor: default;
+}
+
 .authForm__submit-btn:nth-child(10) {
   margin-top: 69px;
 }

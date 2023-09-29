@@ -17,6 +17,7 @@ export default function AuthForm(props) {
           className={`authForm__form authForm__form_type_${props.name}`}
           name='authForm'
           onSubmit={props.onSubmit}
+          noValidate
         >
           {props.children}
           <h3 className='authForm__input-caption'>E-mail</h3>
@@ -50,7 +51,7 @@ export default function AuthForm(props) {
           <span className={`authForm__input-error ${props.name}-email-input-error`}>{props.passwordErr}</span>
 
           <span className='authForm__error'>{props.authError}</span>
-          <button type='submit' className={`authForm__submit-btn ${!props.isValid ? 'authForm__submit-btn_inactive': ''}`}>
+          <button type='submit' className={`authForm__submit-btn ${!props.isValid ? 'authForm__submit-btn_inactive': ''}`} disabled={props.isValid ? false : true}>
             {props.btnTitle}
           </button>
         </form>

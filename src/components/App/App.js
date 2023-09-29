@@ -21,9 +21,7 @@ function App() {
   const [isShort, setIsShort] = useState(
     JSON.parse(localStorage.getItem("isShortMovie")) || false
   );
-  const [searchValue, setSearchValue] = useState(
-    localStorage.getItem("searchValue") || ""
-  );
+  const [searchValue, setSearchValue] = useState("");
   const [currentUser, setCurrentUser] = useState({});
   const [authError, setAuthError] = useState("");
   const [isLoggedIn, setLoggedIn] = useState(null);
@@ -33,6 +31,15 @@ function App() {
   const [isPopupOpen, setPopupOpen] = useState(false);
   const navigate = useNavigate();
   const token = `Bearer ${localStorage.getItem("token")}`;
+
+  const savedSearchValue = localStorage.getItem("searchValue");
+  const isShortMovie = localStorage.getItem("isShortMovie");
+
+  useEffect(() => {
+    if (savedSearchValue && isShortMovie) {
+      setSearchValue(savedSearchValue);
+    }
+  })
 
   function handleRegister(name, email, password) {
     mainApi
@@ -132,7 +139,7 @@ function App() {
       });
   }
 
-  function getMovies(func) {
+  function getInitialMovies(func) {
     setMovieLoadErr(false);
     Promise.all([moviesApi.getMovies(), mainApi.getSavedMovies(token)])
       .then(([allMovies, userSavedMovies]) => {
@@ -143,7 +150,9 @@ function App() {
           mov.isAdded = userMoviesIds.includes(mov.id);
         });
         setMovies(allMovies);
-        func(allMovies);
+        if (func) {
+          func(allMovies);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -230,7 +239,7 @@ function App() {
                       searchValue={searchValue}
                       isShort={isShort}
                       renderedMovies={renderedMovies}
-                      getMovies={getMovies}
+                      getInitialMovies={getInitialMovies}
                       isLoading={isLoading}
                       movieErr={isMovieLoadErr}
                       isLoggedIn={isLoggedIn}
